@@ -1,3 +1,5 @@
-python-telegram-bot>=20.0,<21.0
-deep-translator
+python-telegram-bot==20.8
+deep-translator==1.11.4
+httpx==0.26.0
+requests==2.32.4
 asyncio
