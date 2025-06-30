@@ -1,6 +1,6 @@
 {
   "6428073744": {
-    "src": -1001733995149,
+    "src": -1002008857793,
     "dst": -1001927333500,
     "lang": "en",
     "username": "@goldfx_admin11",
@@ -17,7 +17,7 @@
     "src": -1001733995149,
     "dst": -1001861734817,
     "lang": "en",
-    "username": "@xportal4",
+    "username": "@goldtradingvip1",
     "active": true
   },
   "5717753923": {
@@ -25,6 +25,20 @@
     "dst": -1001694889587,
     "lang": "en",
     "username": "@Goldscalpingvip1",
+    "active": true
+  },
+  "7893301101": {
+    "src": -1001733995149,
+    "dst": -1002622049833,
+    "lang": "en",
+    "username": "@greatinvestmentss",
+    "active": false
+  },
+  "5587193896": {
+    "src": -1002008857793,
+    "dst": -1001780377196,
+    "lang": "en",
+    "username": "@Goldsignalad",
     "active": true
   }
 }

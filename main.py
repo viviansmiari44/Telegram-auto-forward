@@ -235,8 +235,6 @@ def clean_text(text, username="@username"):
     text = re.sub(r'@(?!(\d{3}))[a-zA-Z0-9_]{4,}', username, text)
     # Break up @123456 (numbers) mentions
     text = re.sub(r'@(\d{3,})', break_telegram_mention, text)
-    # Remove hashtags
-    text = re.sub(r'#\w+', '', text)
     # Replace links except whitelisted with username
     text = re.sub(
         r'(https?://[^\s]+|www\.[^\s]+|blockchain[^\s]*)',
@@ -254,6 +252,30 @@ def force_link_usernames(text):
         username = match.group(1)
         return f'<a href="https://t.me/{username}">@{username}</a>'
     return re.sub(r'@([a-zA-Z_][a-zA-Z0-9_]{4,})', make_link, text)
+
+
+# def strip_hashtag_links(text, entities):
+#     """
+#     If a text_link entity's text starts with #, remove the link but keep the hashtag as plain text.
+#     Returns the new text and new entities.
+#     """
+#     if not entities:
+#         return text, entities
+#     new_entities = []
+#     for ent in entities:
+#         try:
+#             # Telegram v20: ent.offset/length are always correct for original text
+#             if ent.type == 'text_link' and text[ent.offset:ent.offset + ent.length].startswith("#"):
+#                 # Do not add this entity (removes the link, keeps the hashtag)
+#                 continue
+#         except Exception as e:
+#             # Defensive: skip errors, but don't crash
+#             pass
+#         new_entities.append(ent)
+#     return text, new_entities
+
+
+
 
 # ----------------- MULTI-USER FORWARDING (NEW) ---------------------
 
@@ -538,6 +560,7 @@ async def quick_forward_control(update: Update, context: ContextTypes.DEFAULT_TY
 # -------------------------------------------------------------
 
 if __name__ == "__main__":
+    # TOKEN = "8191615350:AAGHn0E93wSjrf4LC4C6A4Z3ihcXk3SCRcQ"
     TOKEN = "8191615350:AAGHn0E93wSjrf4LC4C6A4Z3ihcXk3SCRcQ"
     app = ApplicationBuilder().token(TOKEN).build()
 
