@@ -1,6 +1,7 @@
+
 {
   "6428073744": {
-    "src": -1002008857793,
+    "src": -1001733995149,
     "dst": -1001927333500,
     "lang": "en",
     "username": "@goldfx_admin11",
@@ -32,13 +33,55 @@
     "dst": -1002622049833,
     "lang": "en",
     "username": "@greatinvestmentss",
-    "active": false
+    "active": true
   },
   "5587193896": {
     "src": -1002008857793,
     "dst": -1001780377196,
     "lang": "en",
     "username": "@Goldsignalad",
+    "active": true
+  },
+  "7905325535": {
+    "src": -1001733995149,
+    "dst": -1002717605451,
+    "lang": "en",
+    "username": "@Abdulrahman_AI_Qahtani",
+    "active": true
+  },
+  "5764573803": {
+    "src": -1001733995149,
+    "dst": -1001710721615,
+    "lang": "en",
+    "username": "@xauusd_admins",
+    "active": true
+  },
+  "8048913471": {
+    "src": -1001733995149,
+    "dst": -1002334997731,
+    "lang": "en",
+    "username": "@Anders_osterby2",
+    "active": true
+  },
+  "7777501659": {
+    "src": -1001733995149,
+    "dst": -1002862719863,
+    "lang": "en",
+    "username": "@Mikegoldmasterofficials",
+    "active": true
+  },
+  "8167863747": {
+    "src": -1001733995149,
+    "dst": -1002534376301,
+    "lang": "en",
+    "username": "@REMYKING_ADMIN",
+    "active": true
+  },
+  "7616348171": {
+    "src": -1001733995149,
+    "dst": -1002339959396,
+    "lang": "en",
+    "username": "@Robert_croaks",
     "active": true
   }
 }
