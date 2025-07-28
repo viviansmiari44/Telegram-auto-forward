@@ -228,22 +228,36 @@ def link_replacer(match, username="@username"):
 
 
 
-def clean_text(text, username="@username"):
+def clean_text(text, username="@destinationusername"):
     if not text:
         return text
-    # Replace @username mentions with chosen username
-    text = re.sub(r'@(?!(\d{3}))[a-zA-Z0-9_]{4,}', username, text)
-    # Break up @123456 (numbers) mentions
-    text = re.sub(r'@(\d{3,})', break_telegram_mention, text)
-    # Replace links except whitelisted with username
+
+    dest_no_at = username.lstrip("@")
+    # Build the HTML link
+    html_link = f'<a href="https://t.me/{dest_no_at}">{username}</a>'
+
+    # Replace t.me/username (all cases) with HTML link
     text = re.sub(
-        r'(https?://[^\s]+|www\.[^\s]+|blockchain[^\s]*)',
-        lambda m: link_replacer(m, username=username), text
+        r'(https?://)?(www\.)?t\.me/[a-zA-Z0-9_]+',
+        html_link,
+        text,
+        flags=re.IGNORECASE
     )
-    # Replace Telegram links
-    text = re.sub(r't\.me/[^\s]+', username, text)
-    # Replace email addresses with username
-    text = re.sub(r'\b\S+@\S+\.\S+\b', username, text)
+
+    # Replace @username (all cases) with HTML link
+    text = re.sub(
+        r'@[a-zA-Z0-9_]+',
+        html_link,
+        text,
+        flags=re.IGNORECASE
+    )
+
+    # Break up @123456 (numbers) mentions so they are not clickable
+    text = re.sub(r'@(\d+)', break_telegram_mention, text)
+
+    # Replace emails with HTML link
+    text = re.sub(r'\b\S+@\S+\.\S+\b', html_link, text)
+
     return text
 
 

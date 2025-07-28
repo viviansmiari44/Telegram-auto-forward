@@ -1,4 +1,3 @@
-
 {
   "6428073744": {
     "src": -1001733995149,
@@ -82,6 +81,34 @@
     "dst": -1002339959396,
     "lang": "en",
     "username": "@Robert_croaks",
+    "active": true
+  },
+  "6526734657": {
+    "src": -1001733995149,
+    "dst": -1002887794836,
+    "lang": "en",
+    "username": "@MuhammadTradings2",
+    "active": true
+  },
+  "7861950017": {
+    "src": -1001733995149,
+    "dst": -1002658394447,
+    "lang": "en",
+    "username": "@Paulgoldhunter4",
+    "active": true
+  },
+  "7602021814": {
+    "src": -1001733995149,
+    "dst": -1002489069303,
+    "lang": "en",
+    "username": "@bigbull_shivammjawale1",
+    "active": true
+  },
+  "5026353535": {
+    "src": -1001733995149,
+    "dst": -1001523713714,
+    "lang": "en",
+    "username": "@real_wizardtrader",
     "active": true
   }
 }
