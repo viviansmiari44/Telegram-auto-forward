@@ -1,27 +1,27 @@
 {
   "6428073744": {
-    "src": -1001733995149,
+    "src": -1002122718727,
     "dst": -1001927333500,
     "lang": "en",
     "username": "@goldfx_admin11",
     "active": true
   },
   "7878822765": {
-    "src": -1001733995149,
+    "src": -1002122718727,
     "dst": -1002691477120,
     "lang": "ar",
     "username": "@alaa_aayman_fx",
     "active": true
   },
   "5691080275": {
-    "src": -1001733995149,
+    "src": -1002122718727,
     "dst": -1001861734817,
     "lang": "en",
     "username": "@goldtradingvip1",
     "active": true
   },
   "5717753923": {
-    "src": -1001733995149,
+    "src": -1002122718727,
     "dst": -1001694889587,
     "lang": "en",
     "username": "@Goldscalpingvip1",
@@ -42,7 +42,7 @@
     "active": true
   },
   "7905325535": {
-    "src": -1001733995149,
+    "src": -1002122718727,
     "dst": -1002717605451,
     "lang": "en",
     "username": "@islamicgoldscalping",
@@ -70,14 +70,14 @@
     "active": false
   },
   "8167863747": {
-    "src": -1001733995149,
+    "src": -1002122718727,
     "dst": -1002534376301,
     "lang": "en",
     "username": "@REMYKING_ADMIN",
     "active": true
   },
   "6526734657": {
-    "src": -1001733995149,
+    "src": -1002122718727,
     "dst": -1002887794836,
     "lang": "en",
     "username": "@MuhammadTradings2",
@@ -98,10 +98,31 @@
     "active": true
   },
   "5026353535": {
-    "src": -1001733995149,
+    "src": -1002122718727,
     "dst": -1001523713714,
     "lang": "en",
-    "username": "@real_wizardtrader",
+    "username": "@Riccienick1",
+    "active": true
+  },
+  "7581699815": {
+    "src": -1002122718727,
+    "dst": -1002339959396,
+    "lang": "en",
+    "username": "@official_admins1",
+    "active": true
+  },
+  "7448412953": {
+    "src": -1002122718727,
+    "dst": -1002215659769,
+    "lang": "ar",
+    "username": "@Assadalsharefs",
+    "active": true
+  },
+  "6606557980": {
+    "src": -1002122718727,
+    "dst": -1001928827257,
+    "lang": "en",
+    "username": "@MOHAMMED_TRADINGS",
     "active": true
   }
 }

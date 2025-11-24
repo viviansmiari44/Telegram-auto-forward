@@ -232,10 +232,11 @@ def clean_text(text, username="@destinationusername"):
     if not text:
         return text
 
+    # Normalise the destination username to always start with "@"
     dest_no_at = username.lstrip("@")
-    html_link = f'<a href="https://t.me/{dest_no_at}">{username}</a>'
+    replacement = username if username.startswith("@") else f"@{dest_no_at}"
 
-    # Remove t.me/@1234xxxx links (where username starts with 4 digits)
+    # 1) t.me/@1234xxxx → "@1234xxxx" (keep as plain text)
     text = re.sub(
         r'(https?://)?(www\.)?t\.me/@?(\d{4}[a-zA-Z0-9_]+)',
         lambda m: f"@{m.group(3)}",
@@ -243,33 +244,36 @@ def clean_text(text, username="@destinationusername"):
         flags=re.IGNORECASE
     )
 
-    # Replace t.me/username (where username does NOT start with 4 digits) with HTML link
+    # 2) t.me/username (where username does NOT start with 4 digits) → your replacement username
     text = re.sub(
         r'(https?://)?(www\.)?t\.me/@?([a-zA-Z_][a-zA-Z0-9_]+)',
-        html_link,
+        replacement,
         text,
         flags=re.IGNORECASE
     )
 
-    # Now for @-mentions
-    # Keep @1234xxxx as plain text (not linkified, not replaced)
+    # 3) Keep @1234xxxx as-is (do not change these)
     text = re.sub(
         r'@(\d{4}[a-zA-Z0-9_]+)',
-        lambda m: m.group(0),  # just leave as is
+        lambda m: m.group(0),
         text
     )
 
-    # Replace all other @usernames with HTML link
+    # 4) All other @usernames → your replacement username
     text = re.sub(
         r'@([a-zA-Z_][a-zA-Z0-9_]+)',
-        html_link,
+        replacement,
         text
     )
 
-    # Replace emails with HTML link
-    text = re.sub(r'\b\S+@\S+\.\S+\b', html_link, text)
+    # 5) Emails → your replacement username
+    #    Only match real-looking emails: domain must contain letters and TLD must be letters only
+    email_pattern = r'\b\S+@[A-Za-z0-9._-]*[A-Za-z][A-Za-z0-9._-]*\.[A-Za-z]{2,}\b'
+    text = re.sub(email_pattern, replacement, text)
 
     return text
+
+
 
 
 
