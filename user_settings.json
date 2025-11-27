@@ -27,13 +27,6 @@
     "username": "@Goldscalpingvip1",
     "active": true
   },
-  "7893301101": {
-    "src": -1001733995149,
-    "dst": -1002622049833,
-    "lang": "en",
-    "username": "@greatinvestmentss",
-    "active": true
-  },
   "5587193896": {
     "src": -1002008857793,
     "dst": -1001780377196,
@@ -48,27 +41,6 @@
     "username": "@islamicgoldscalping",
     "active": true
   },
-  "5764573803": {
-    "src": -1001733995149,
-    "dst": -1001710721615,
-    "lang": "en",
-    "username": "@xauusd_admins",
-    "active": true
-  },
-  "8048913471": {
-    "src": -1001733995149,
-    "dst": -1002334997731,
-    "lang": "en",
-    "username": "@Anders_osterby2",
-    "active": true
-  },
-  "7777501659": {
-    "src": -1001733995149,
-    "dst": -1002862719863,
-    "lang": "en",
-    "username": "@Mikegoldmasterofficials",
-    "active": false
-  },
   "8167863747": {
     "src": -1002122718727,
     "dst": -1002534376301,
@@ -81,20 +53,6 @@
     "dst": -1002887794836,
     "lang": "en",
     "username": "@MuhammadTradings2",
-    "active": true
-  },
-  "7861950017": {
-    "src": -1001733995149,
-    "dst": -1002658394447,
-    "lang": "en",
-    "username": "@Paulgoldhunter4",
-    "active": true
-  },
-  "7602021814": {
-    "src": -1001733995149,
-    "dst": -1002489069303,
-    "lang": "en",
-    "username": "@bigbull_shivammjawale1",
     "active": true
   },
   "5026353535": {
@@ -123,6 +81,20 @@
     "dst": -1001928827257,
     "lang": "en",
     "username": "@MOHAMMED_TRADINGS",
+    "active": true
+  },
+  "7848851167": {
+    "src": -1002122718727,
+    "dst": -1002091307049,
+    "lang": "en",
+    "username": "@AndersTradings_PM",
+    "active": true
+  },
+  "7596218360": {
+    "src": -1002122718727,
+    "dst": -100295645376,
+    "lang": "en",
+    "username": "@anders_osterby1",
     "active": true
   }
 }
