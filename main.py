@@ -227,7 +227,6 @@ def link_replacer(match, username="@username"):
     return username
 
 
-
 def clean_text(text, username="@destinationusername"):
     if not text:
         return text
