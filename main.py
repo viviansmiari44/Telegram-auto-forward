@@ -15,98 +15,41 @@ import re
 from deep_translator import GoogleTranslator
 from telegram.constants import ParseMode
 
-from dotenv import load_dotenv
-from supabase import create_client, Client
 
-# Load environment variables from .env file
-load_dotenv()
-
-# ---------------- MULTI-USER SETTINGS (SUPABASE) ----------------
-SUPABASE_URL = os.environ.get("SUPABASE_URL")
-SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
+# ---------------- MULTI-USER SETTINGS (NEW) ----------------
+SETTINGS_FILE = "user_settings.json"
 
 def load_user_settings():
-    if not supabase:
-        print("Supabase client not initialized!")
+    if not os.path.exists(SETTINGS_FILE):
         return {}
-    try:
-        response = supabase.table("user_settings").select("*").execute()
-        settings = {}
-        for row in response.data:
-            uid = str(row["user_id"])
-            settings[uid] = {
-                "src": row.get("src"),
-                "dst": row.get("dst"),
-                "lang": row.get("lang", "en"),
-                "username": row.get("username", ""),
-                "active": row.get("active", True)
-            }
-        return settings
-    except Exception as e:
-        print(f"Error loading settings from Supabase: {e}")
-        return {}
+    with open(SETTINGS_FILE, "r") as f:
+        return json.load(f)
 
 def save_user_settings(settings):
-    if not supabase:
-        return
-    for user_id, conf in settings.items():
-        try:
-            supabase.table("user_settings").upsert({
-                "user_id": str(user_id),
-                "src": conf.get("src"),
-                "dst": conf.get("dst"),
-                "lang": conf.get("lang", "en"),
-                "username": conf.get("username", ""),
-                "active": conf.get("active", True)
-            }).execute()
-        except Exception as e:
-            print(f"Error saving settings for user {user_id}: {e}")
+    with open(SETTINGS_FILE, "w") as f:
+        json.dump(settings, f, indent=2)
 
 def get_settings(user_id):
-    if not supabase:
-        return {"src": None, "dst": None, "lang": "en", "username": "", "active": True}
-    try:
-        response = supabase.table("user_settings").select("*").eq("user_id", str(user_id)).execute()
-        if response.data:
-            row = response.data[0]
-            return {
-                "src": row.get("src"),
-                "dst": row.get("dst"),
-                "lang": row.get("lang", "en"),
-                "username": row.get("username", ""),
-                "active": row.get("active", True)
-            }
-    except Exception as e:
-        print(f"Error getting settings for user {user_id}: {e}")
-    return {
+    settings = load_user_settings()
+    return settings.get(str(user_id), {
         "src": None,
         "dst": None,
         "lang": "en",
         "username": "",
         "active": True,
-    }
+    })
+
 
 def update_settings(user_id, **kwargs):
+    settings = load_user_settings()
     user_id = str(user_id)
-    current = get_settings(user_id)
-    current.update(kwargs)
-    
-    if not supabase:
-        print("Supabase client not initialized!")
-        return
-    try:
-        supabase.table("user_settings").upsert({
-            "user_id": user_id,
-            "src": current.get("src"),
-            "dst": current.get("dst"),
-            "lang": current.get("lang", "en"),
-            "username": current.get("username", ""),
-            "active": current.get("active", True)
-        }).execute()
-        print(f"Updated settings for user {user_id}: {current}")
-    except Exception as e:
-        print(f"Error updating settings in Supabase for user {user_id}: {e}")
+    if user_id not in settings:
+        settings[user_id] = {
+            "src": None, "dst": None, "lang": "en", "username": "", "active": True
+        }
+    settings[user_id].update(kwargs)
+    save_user_settings(settings)
+    print(f"Updated settings for user {user_id}: {settings[user_id]}")
 
 # --------------- MENU AND COMMANDS (NEW) -------------------
 
@@ -238,11 +181,15 @@ def translate_preserving_usernames(text: str, dest: str = "ar") -> str:
         if part.startswith('@') and len(part) > 4:
             out.append(part)
         else:
-            try:
-                out.append(GoogleTranslator(source='auto', target=dest).translate(part) if part.strip() else part)
-            except Exception as e:
-                print(f"Translation error: {e}")
+            if not part.strip():
                 out.append(part)
+                continue
+            try:
+                translated = GoogleTranslator(source='auto', target=dest).translate(part)
+                out.append(translated if translated else part)
+            except Exception as e:
+                print(f"Translation error (falling back to original text): {e}")
+                out.append(part)  # Fallback to original text if rate-limited
     return ''.join(out)
 
 # ------------- These will be dynamically fetched per user -----------
@@ -384,9 +331,12 @@ async def manual_forward(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print(f"Checking user {user_id} src={user_conf.get('src')} dst={user_conf.get('dst')}")
         print(f"User {user_id} active state: {user_conf.get('active', True)}")
         if user_conf.get("src") == channel_id and user_conf.get("active", True):
+            dst = user_conf.get("dst")
+            if not dst:
+                print(f"Skipping user {user_id}: Destination channel (dst) is not set.")
+                continue
             found = True
             print(f"Matched user {user_id}, will forward!")
-            dst = user_conf.get("dst")
             lang = user_conf.get("lang", "en")
             username = user_conf.get("username", "@username")
             print(f"Passing username to forward_message_recursive: {username}")
